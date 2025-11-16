@@ -53,32 +53,3 @@ Explain the purpose of the `log1p` line.
 
 skewed_columns = ['VRDeck','Spa','ShoppingMall','FoodCourt','RoomService']
 df_train[skewed_columns] = df_train[skewed_columns].apply(np.log1p)
-B. Documenting Standardization (The "Fairness")
-Mục đích: Giải thích tại sao StandardScaler là cần thiết để đảm bảo sự công bằng giữa các đặc trưng số.
-
-Python
-
-# [Markdown Cell: 2.2 Standardization for Fairness]
-
-# PURPOSE: ENSURE FAIRNESS (mean=0, std=1)
-# Standardizing Age and the log-transformed spending columns is mandatory for linear models
-# to ensure features with large scales (like the spending features) aren't seen as more
-# important than features with smaller scales (like Age).
-
-from sklearn.preprocessing import StandardScaler
-numerical_columns = ['Age', 'RoomService', 'FoodCourt', 'ShoppingMall', 'Spa', 'VRDeck']
-scaler = StandardScaler() 
-df_train[numerical_columns] = scaler.fit_transform(df_train[numerical_columns])
-C. Documenting Grid Search Result (The "Overfitting Fix")
-Mục đích: Giải thích lý do tại sao các thông số tối ưu nhất lại tốt hơn các thông số mặc định (đây là bằng chứng của quá trình tối ưu hóa).
-
-Python
-
-# [Markdown Cell: 3.2 Optimization Insight: Max_Depth]
-
-# KEY INSIGHT: The best parameters found by Grid Search led to the final accuracy of 78.67%
-# The most critical parameter was:
-# 'max_depth': 8 
-
-# By restricting the tree's depth, we successfully prevented the model from learning
-# the training noise (overfitting), enabling it to generalize better to the unseen validation data.
