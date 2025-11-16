@@ -33,23 +33,3 @@ This project focuses on the Binary Classification problem of predicting whether 
 * scikit-learn
 * xgboost
 
----
-
-## 📝 2. Essential Notebook Adjustments
-
-You must add **Markdown cells** and **code comments** to your Jupyter Notebook to explain *why* you made certain decisions.
-
-### **A. Documenting Log Transform (The "Why"):**
-
-Explain the purpose of the `log1p` line.
-
-```python
-# [Markdown Cell: 2.1 Transformation for Skewness]
-
-# PURPOSE: CURE SKEWNESS (Lệch)
-# We use np.log1p(x) (which is log(x+1)) on spending columns because the original data
-# is heavily skewed (many zeros, massive maximums). Log transformation
-# compresses the large outliers, leading to a more normal distribution for the model.
-
-skewed_columns = ['VRDeck','Spa','ShoppingMall','FoodCourt','RoomService']
-df_train[skewed_columns] = df_train[skewed_columns].apply(np.log1p)
